@@ -13,7 +13,7 @@ from IPython.display import clear_output
 import random
 
 
-class GomokuEngine:
+class MakeCEngine:
     def __init__(self):
         self.board = np.full((15,15),-1, dtype=np.dtype(int)) #board to store moves. If user moves first: -1 - empty, 0 - user, 1 - AI
         self.positive_directions = [(0,1),(1,1),(1,0),(1,-1)] #direction vectors, that should be considered in evaluated multiplied by 1 and -1

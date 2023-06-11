@@ -3,10 +3,10 @@
 # Created By  : Asif Saad, Shihab Newaz
 # Created Date: 26.05.2023
 # ---------------------------------------------------------------------------
-# This is a simple GUI in PyQT for gomoku engine from gomoku.py
+# This is a simple GUI in PyQT for MakeC engine from MakeC.py
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from gomoku import GomokuEngine
+from MakeC import MakeCEngine
 
 
 class QLabel_alterada(QtWidgets.QLabel):
@@ -25,15 +25,15 @@ class Window(QtWidgets.QWidget):
         self.ai_turn = 1
         self.ai_depth = 2
         self.move_hint = (7, 7) #initial move hint
-        self.setWindowTitle('Gomoku')
-        self.setWindowIcon(QtGui.QIcon('gomoku.ico'))
+        self.setWindowTitle('MakeC')
+        self.setWindowIcon(QtGui.QIcon('MakeC.ico'))
         self.game_over = False
         self.empty_pixmap = QtGui.QPixmap('empty.jpg')
         self.layout = QtWidgets.QGridLayout(self)
         self.layout.setHorizontalSpacing(1)
         self.layout.setVerticalSpacing(1)
         self.labels = {}
-        self.game_engine = GomokuEngine()
+        self.game_engine = MakeCEngine()
         self.move_count = 0
         for row in range(15):
             for column in range(15):
