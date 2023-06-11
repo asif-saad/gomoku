@@ -245,50 +245,50 @@ class MakeCEngine:
         last_eval = self.evaluate([cur_move])
         return last_eval
     
-    def play_ipynb(self): #used to play in jupyter, without GUI
-        cur_turn = 0
-        game_over = False
-        move_hint = (7,7)
-        board_size = self.board.shape[0] * self.board.shape[1]
-        move_counter = 0
-        last_eval = 0
-        last_ai_move = [-1, -1]
-        while not game_over:
-            clear_output(wait = False)
-            cur_move = [-1,-1]
-            if cur_turn == 1:
-                last_eval, last_ai_move = self.ai_move(self.ai_depth, cur_turn, move_hint) 
-            else:
-                if last_ai_move[0] != -1:
-                    print('AI move',last_ai_move)
-                good_input = False
-                warning_message = False
-                user_input = (-1,-1)
-                while not good_input:
-                    user_input = self.display_board_inpynb(warning_message, True)
-                    if(len(user_input) == 2 and int(user_input[0]) >= 0 and int(user_input[0]) <= 14 and int(user_input[1]) >= 0 and int(user_input[1]) <= 14):
-                        good_input = True
-                        cur_move = (int(user_input[0]), int(user_input[1]))
-                        move_hint = cur_move
-                        self.board[cur_move] = cur_turn
-                        last_eval = self.evaluate([cur_move])
-                    else:
-                        warning_message = True
-            move_counter += 1
-            if last_eval == float('inf'):
-                self.display_board_inpynb(False,False)
-                print('USER WINS, GAME OVER')
-                game_over = True
-            if last_eval == -1 * float('inf'):
-                self.display_board_inpynb(False,False)
-                print('AI WINS, GAME OVER')
-                game_over = True
-            cur_turn = (cur_turn + 1) % 2
-            if move_counter == board_size and not game_over:
-                self.display_board_inpynb(False,False)
-                print('TIE, GAME OVER')
-                game_over = True
-        return
+    # def play_ipynb(self): #used to play in jupyter, without GUI
+    #     cur_turn = 0
+    #     game_over = False
+    #     move_hint = (7,7)
+    #     board_size = self.board.shape[0] * self.board.shape[1]
+    #     move_counter = 0
+    #     last_eval = 0
+    #     last_ai_move = [-1, -1]
+    #     while not game_over:
+    #         clear_output(wait = False)
+    #         cur_move = [-1,-1]
+    #         if cur_turn == 1:
+    #             last_eval, last_ai_move = self.ai_move(self.ai_depth, cur_turn, move_hint) 
+    #         else:
+    #             if last_ai_move[0] != -1:
+    #                 print('AI move',last_ai_move)
+    #             good_input = False
+    #             warning_message = False
+    #             user_input = (-1,-1)
+    #             while not good_input:
+    #                 user_input = self.display_board_inpynb(warning_message, True)
+    #                 if(len(user_input) == 2 and int(user_input[0]) >= 0 and int(user_input[0]) <= 14 and int(user_input[1]) >= 0 and int(user_input[1]) <= 14):
+    #                     good_input = True
+    #                     cur_move = (int(user_input[0]), int(user_input[1]))
+    #                     move_hint = cur_move
+    #                     self.board[cur_move] = cur_turn
+    #                     last_eval = self.evaluate([cur_move])
+    #                 else:
+    #                     warning_message = True
+    #         move_counter += 1
+    #         if last_eval == float('inf'):
+    #             self.display_board_inpynb(False,False)
+    #             print('USER WINS, GAME OVER')
+    #             game_over = True
+    #         if last_eval == -1 * float('inf'):
+    #             self.display_board_inpynb(False,False)
+    #             print('AI WINS, GAME OVER')
+    #             game_over = True
+    #         cur_turn = (cur_turn + 1) % 2
+    #         if move_counter == board_size and not game_over:
+    #             self.display_board_inpynb(False,False)
+    #             print('TIE, GAME OVER')
+    #             game_over = True
+    #     return
     
     def reset_board(self):
         self.board = np.full((15,15),-1, dtype=np.dtype(int))

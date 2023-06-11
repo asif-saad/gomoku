@@ -30,8 +30,8 @@ class Window(QtWidgets.QWidget):
         self.game_over = False
         self.empty_pixmap = QtGui.QPixmap('empty.jpg')
         self.layout = QtWidgets.QGridLayout(self)
-        self.layout.setHorizontalSpacing(1)
-        self.layout.setVerticalSpacing(1)
+        self.layout.setHorizontalSpacing(0)
+        self.layout.setVerticalSpacing(0)
         self.labels = {}
         self.game_engine = MakeCEngine()
         self.move_count = 0
