@@ -7,6 +7,12 @@
 # This AI simply predicts 3 next moves with some dummy evaluation function and selects the best from minimax with alpha/beta.
 # Current recursion depth is 3 and I did not manage to increase it on pure python without major speed loss, still game AI is decent to play with.
 
+
+
+
+## commented can_move, user_move
+
+
 import numpy as np
 from tabulate import tabulate
 from IPython.display import clear_output
@@ -237,13 +243,13 @@ class MakeCEngine:
         last_eval = self.evaluate([best_move])
         return last_eval, best_move
     
-    def can_move(self, move):
-        return self.board[move] == -1
+    # def can_move(self, move):
+    #     return self.board[move] == -1
     
-    def user_move(self, cur_turn, cur_move):
-        self.board[cur_move] = cur_turn
-        last_eval = self.evaluate([cur_move])
-        return last_eval
+    # def user_move(self, cur_turn, cur_move):
+    #     self.board[cur_move] = cur_turn
+    #     last_eval = self.evaluate([cur_move])
+    #     return last_eval
     
     # def play_ipynb(self): #used to play in jupyter, without GUI
     #     cur_turn = 0
