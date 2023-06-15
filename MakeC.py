@@ -3,7 +3,7 @@
 # Created By  : Asif Saad, Shihab Newaz
 # Created Date: 26.05.2023
 # ---------------------------------------------------------------------------
-# This is a simple gomoku engine embedded in class that you can play with (and certainly can win).
+# This is a simple MakeC engine embedded in class that you can play with (and certainly can win).
 # This AI simply predicts 3 next moves with some dummy evaluation function and selects the best from minimax with alpha/beta.
 # Current recursion depth is 3 and I did not manage to increase it on pure python without major speed loss, still game AI is decent to play with.
 
@@ -23,7 +23,7 @@ class MakeCEngine:
         self.board = np.full((15,15),-1, dtype=np.dtype(int)) #board to store moves. If user moves first: -1 - empty, 0 - user, 1 - AI
         self.positive_directions = [(0,1),(1,1),(1,0),(1,-1)] #direction vectors, that should be considered in evaluated multiplied by 1 and -1
         self.ai_depth = 2 #number of moves to forecast during AI move
-        
+
     
     def getChildren(self, only_closest_moves = False): #returns coords on board that should be considered as possible moves. Dummy for now.
         if not only_closest_moves:
@@ -50,8 +50,8 @@ class MakeCEngine:
         evaluation = 0
         init_move_switch = self.board[last_moves[0]]
         move_switch = init_move_switch
-        for position in last_moves:
-            self.board[position] = -1
+        # for position in last_moves:
+        #     self.board[position] = -1
         for position in last_moves:
             self.board[position] = move_switch
             move_switch = (move_switch + 1) % 2
