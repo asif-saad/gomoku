@@ -50,8 +50,6 @@ class MakeCEngine:
         evaluation = 0
         init_move_switch = self.board[last_moves[0]]
         move_switch = init_move_switch
-        # for position in last_moves:
-        #     self.board[position] = -1
         for position in last_moves:
             self.board[position] = move_switch
             move_switch = (move_switch + 1) % 2
@@ -68,17 +66,22 @@ class MakeCEngine:
                     cur_position[0] += direction[0]
                     cur_position[1] += direction[1]
                     if not (cur_position[0] >= 0 and cur_position[0] <= 14 and cur_position[1] >= 0 and cur_position[1] <= 14):
+                        # checking if within board
                         can_move = False
                     else:
+                        # if current position within board
                         if self.board[tuple(cur_position)] == turn:
+                            # when current position and actual position have same turn
                             line_count += 1
                             if line_count >= 5:
+                                ## if all 5 points match?
                                 for position in last_moves:
                                     self.board[position] = init_move_switch
                                     init_move_switch = (init_move_switch + 1) % 2
                                 return multiplier * float('inf')
                         else: 
                             if self.board[tuple(cur_position)] == -1:
+                                # it is set to initial, no one accessed this cell yet
                                 is_blocked1 = False
                             can_move = False
                 cur_position = list(position)
