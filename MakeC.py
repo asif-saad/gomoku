@@ -23,25 +23,7 @@ class MakeCEngine:
         self.board = np.full((15,15),-1, dtype=np.dtype(int)) #board to store moves. If user moves first: -1 - empty, 0 - user, 1 - AI
         self.positive_directions = [(0,1),(1,1),(1,0),(1,-1)] #direction vectors, that should be considered in evaluated multiplied by 1 and -1
         self.ai_depth = 2 #number of moves to forecast during AI move
-    
-    def display_board_inpynb(self, warning = False, get_input = True): #useful for tests to work in jupyter
-        board_to_show = [['' for _ in range(15)] for _ in range(15)]
-        for row in range(self.board.shape[0]):
-            for col in range(self.board.shape[1]):
-                if self.board[row,col] < 0:
-                    board_to_show[row][col] = "\x1b[37m" + str(row)+'-'+str(col)
-                elif self.board[row,col] == 0:
-                    board_to_show[row][col] = "\x1b[39m" + 'X'
-                elif self.board[row,col] == 1:
-                    board_to_show[row][col] = "\x1b[39m" + 'O'
-        table = tabulate(board_to_show,tablefmt="plain",stralign="center")
-        if warning:
-            print('Wrong input! Please input cell coordinate in format "i-j" like in gray cells.')
-        print(table)
-        if get_input:
-            input_string = input('Your move:')
-            return input_string.split('-')
-        return []
+        
     
     def getChildren(self, only_closest_moves = False): #returns coords on board that should be considered as possible moves. Dummy for now.
         if not only_closest_moves:
