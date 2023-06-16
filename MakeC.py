@@ -147,10 +147,13 @@ class MakeCEngine:
         if turn == 0: #we are in max node - user move
             v = min_val
             for coord in children:
+                # iterating for all possible children
                 if self.board[coord] != -1:
                     continue
                 self.board[coord] = turn
+                
                 children = children.difference([coord])
+                # subtracting current co-ordinate from children list
                 buf = self.get_all_neigh_possible_moves(coord)
                 children = children.union(buf)
                 last_moves.append(coord)
@@ -196,8 +199,8 @@ class MakeCEngine:
                 min_move = move
         return min_move
     
-    def ai_move(self, ai_depth, cur_turn, move_hint, only_closest = True, for_profiler = False): #main function to choose AI move and update board evaluation
-        
+    def ai_move(self, ai_depth, cur_turn, move_hint, only_closest = True, for_profiler = False): 
+        #main function to choose AI move and update board evaluation
         best_move = self.find_closest_move(move_hint)
         best_evaluation = float('inf')
         best_d = 0
@@ -207,6 +210,7 @@ class MakeCEngine:
             self.board[move] = cur_turn
             children = possible_moves.difference([move])
             evaluation, d1 = self.minimax([move], ai_depth, -1*float('inf'), float('inf'), only_closest, children)
+            # sending every possible moves one by one to minimax function
             children = possible_moves.union([move])
             self.board[move] = -1
             if evaluation < best_evaluation or (evaluation == best_evaluation and d1 > best_d):
