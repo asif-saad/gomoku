@@ -155,7 +155,9 @@ class MakeCEngine:
                 children = children.difference([coord])
                 # subtracting current co-ordinate from children list
                 buf = self.get_all_neigh_possible_moves(coord)
+                # all possible neighbors of the child node
                 children = children.union(buf)
+                # merge possible neighbors with children list
                 last_moves.append(coord)
                 v1, d1 = self.minimax(last_moves, d-1, v, max_val, only_closest, children)
                 last_moves.pop()
