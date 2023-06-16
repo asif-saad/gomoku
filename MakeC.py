@@ -13,8 +13,6 @@
 
 
 import numpy as np
-from tabulate import tabulate
-from IPython.display import clear_output
 import random
 
 
@@ -89,7 +87,7 @@ class MakeCEngine:
                 can_move = True
                 is_blocked2 = True
                 while can_move:
-                    # doing the reverse of previous can_move while loop
+                    # doing the reverse of previous can_move while loop like the convolution
                     cur_position[0] -= direction[0]
                     cur_position[1] -= direction[1]
                     if not (cur_position[0] >= 0 and cur_position[0] <= 14 and cur_position[1] >= 0 and cur_position[1] <= 14):
@@ -98,6 +96,7 @@ class MakeCEngine:
                         if self.board[tuple(cur_position)] == turn:
                             line_count += 1
                             if line_count >= 5:
+                                
                                 for position in last_moves:
                                     self.board[position] = init_move_switch
                                     init_move_switch = (init_move_switch + 1) % 2
@@ -107,11 +106,6 @@ class MakeCEngine:
                                 is_blocked2 = False
                             can_move = False
                 cur_position = list(position)
-                # if line_count >= 5:
-                #     for position in last_moves:
-                #         self.board[position] = init_move_switch
-                #         init_move_switch = (init_move_switch + 1) % 2
-                #     return multiplier * float('inf')
                 mul_blocked = 1
                 if line_count == 4:
                     mul_blocked = 4
@@ -236,51 +230,6 @@ class MakeCEngine:
         self.board[cur_move] = cur_turn
         last_eval = self.evaluate([cur_move])
         return last_eval
-    
-    # def play_ipynb(self): #used to play in jupyter, without GUI
-    #     cur_turn = 0
-    #     game_over = False
-    #     move_hint = (7,7)
-    #     board_size = self.board.shape[0] * self.board.shape[1]
-    #     move_counter = 0
-    #     last_eval = 0
-    #     last_ai_move = [-1, -1]
-    #     while not game_over:
-    #         clear_output(wait = False)
-    #         cur_move = [-1,-1]
-    #         if cur_turn == 1:
-    #             last_eval, last_ai_move = self.ai_move(self.ai_depth, cur_turn, move_hint) 
-    #         else:
-    #             if last_ai_move[0] != -1:
-    #                 print('AI move',last_ai_move)
-    #             good_input = False
-    #             warning_message = False
-    #             user_input = (-1,-1)
-    #             while not good_input:
-    #                 user_input = self.display_board_inpynb(warning_message, True)
-    #                 if(len(user_input) == 2 and int(user_input[0]) >= 0 and int(user_input[0]) <= 14 and int(user_input[1]) >= 0 and int(user_input[1]) <= 14):
-    #                     good_input = True
-    #                     cur_move = (int(user_input[0]), int(user_input[1]))
-    #                     move_hint = cur_move
-    #                     self.board[cur_move] = cur_turn
-    #                     last_eval = self.evaluate([cur_move])
-    #                 else:
-    #                     warning_message = True
-    #         move_counter += 1
-    #         if last_eval == float('inf'):
-    #             self.display_board_inpynb(False,False)
-    #             print('USER WINS, GAME OVER')
-    #             game_over = True
-    #         if last_eval == -1 * float('inf'):
-    #             self.display_board_inpynb(False,False)
-    #             print('AI WINS, GAME OVER')
-    #             game_over = True
-    #         cur_turn = (cur_turn + 1) % 2
-    #         if move_counter == board_size and not game_over:
-    #             self.display_board_inpynb(False,False)
-    #             print('TIE, GAME OVER')
-    #             game_over = True
-    #     return
     
     def reset_board(self):
         self.board = np.full((15,15),-1, dtype=np.dtype(int))
