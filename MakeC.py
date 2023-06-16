@@ -84,10 +84,12 @@ class MakeCEngine:
                                 # it is set to initial, no one accessed this cell yet
                                 is_blocked1 = False
                             can_move = False
+                # reintroducing for again evaluation
                 cur_position = list(position)
                 can_move = True
                 is_blocked2 = True
                 while can_move:
+                    # doing the reverse of previous can_move while loop
                     cur_position[0] -= direction[0]
                     cur_position[1] -= direction[1]
                     if not (cur_position[0] >= 0 and cur_position[0] <= 14 and cur_position[1] >= 0 and cur_position[1] <= 14):
@@ -105,11 +107,11 @@ class MakeCEngine:
                                 is_blocked2 = False
                             can_move = False
                 cur_position = list(position)
-                if line_count >= 5:
-                    for position in last_moves:
-                        self.board[position] = init_move_switch
-                        init_move_switch = (init_move_switch + 1) % 2
-                    return multiplier * float('inf')
+                # if line_count >= 5:
+                #     for position in last_moves:
+                #         self.board[position] = init_move_switch
+                #         init_move_switch = (init_move_switch + 1) % 2
+                #     return multiplier * float('inf')
                 mul_blocked = 1
                 if line_count == 4:
                     mul_blocked = 4
@@ -122,7 +124,7 @@ class MakeCEngine:
                 if line_count > 1:
                     evaluation += multiplier * line_count * mul_blocked
             if evaluation == 0:
-                evaluation = multiplier * 1
+                evaluation = multiplier
         return evaluation
 
 
