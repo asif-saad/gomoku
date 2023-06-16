@@ -95,8 +95,7 @@ class MakeCEngine:
                     else:
                         if self.board[tuple(cur_position)] == turn:
                             line_count += 1
-                            if line_count >= 5:
-                                
+                            if line_count >= 5:    
                                 for position in last_moves:
                                     self.board[position] = init_move_switch
                                     init_move_switch = (init_move_switch + 1) % 2
@@ -136,6 +135,7 @@ class MakeCEngine:
         return result
     
     def minimax(self, last_moves, d, min_val, max_val, only_closest = True, children = None): #recursive minimax with alpha-beta that performs evaluation in every node, not only in leafs (thus evaluation should be very cheap)
+
         if d == 0:
             cur_evalutaion = self.evaluate(last_moves)
             return cur_evalutaion, d
@@ -185,7 +185,7 @@ class MakeCEngine:
                     return min_val, d1         
             return v, d1
     
-    def find_closest_move(self, move_hint): #just a small helper for first move selection during AI move analisys
+    def find_closest_move(self, move_hint): # first move selection during AI move analysis
         min_dist = float('inf')
         min_move = (-1,-1)
         possible_moves = self.getChildren()
@@ -197,6 +197,7 @@ class MakeCEngine:
         return min_move
     
     def ai_move(self, ai_depth, cur_turn, move_hint, only_closest = True, for_profiler = False): #main function to choose AI move and update board evaluation
+        
         best_move = self.find_closest_move(move_hint)
         best_evaluation = float('inf')
         best_d = 0
