@@ -1,5 +1,4 @@
-
-#----------------------------------------------------------------------------
+# ----------------------------------------------------------------------------
 # Created By  : Asif Saad, Shihab Newaz
 # Created Date: 26.05.2023
 # ---------------------------------------------------------------------------
@@ -10,10 +9,11 @@ from MakeC import MakeCEngine
 
 
 class QLabel_alterada(QtWidgets.QLabel):
-    clicked=QtCore.pyqtSignal()
+    clicked = QtCore.pyqtSignal()
 
     def mousePressEvent(self, ev):
         self.clicked.emit()
+
 
 class Window(QtWidgets.QWidget):
     def __init__(self):
@@ -24,7 +24,7 @@ class Window(QtWidgets.QWidget):
         self.user_turn = 0
         self.ai_turn = 1
         self.ai_depth = 2
-        self.move_hint = (7, 7) #initial move hint
+        self.move_hint = (7, 7)  # initial move hint
         self.setWindowTitle('MakeC')
         self.setWindowIcon(QtGui.QIcon('MakeC.ico'))
         self.game_over = False
@@ -38,19 +38,17 @@ class Window(QtWidgets.QWidget):
         for row in range(15):
             for column in range(15):
                 label = QLabel_alterada(self)
-                label.coord_ = (row,column)
-                label.setObjectName(str(row)+'-'+str(column))
-                #label.setPixmap(self.empty_pixmap)
+                label.coord_ = (row, column)
+                label.setObjectName(str(row) + '-' + str(column))
+                # label.setPixmap(self.empty_pixmap)
                 self.layout.addWidget(label, row, column)
-                label.clicked.connect(self.processUserMove) 
+                label.clicked.connect(self.processUserMove)
                 self.labels[label.coord_] = label
         self.drawEmptyBoard()
-    
-    
+
     def drawEmptyBoard(self):
         for key in self.labels:
             self.labels[key].setPixmap(self.empty_pixmap)
-
 
     def processUserMove(self):
         label_sender = self.sender()
@@ -80,7 +78,6 @@ class Window(QtWidgets.QWidget):
                     self.game_over = True
                     self.restart_dialogue(winner_message)
                     return
-    
 
     def restart_dialogue(self, winner_message):
         dlg = QtWidgets.QMessageBox(self)
@@ -99,10 +96,11 @@ class Window(QtWidgets.QWidget):
         else:
             dlg.close()
             self.close()
-        
+
 
 if __name__ == '__main__':
     import sys
+
     app = QtWidgets.QApplication(sys.argv)
     window = Window()
     window.setGeometry(100, 100, 700, 700)
