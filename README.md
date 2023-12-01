@@ -1,4 +1,4 @@
-# gomoku-pyqt
+# gomoku
 Toy project -- implementing Gomoku with minimax and alpha/beta.
 GUI implemented via PyQT5.
 
